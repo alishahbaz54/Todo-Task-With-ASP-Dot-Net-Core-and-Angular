@@ -1,0 +1,76 @@
+<div id="page-wrap">
+    <div id="header">
+        <h1><a href="">PHP Sample Test App</a></h1>
+    </div>
+
+    <div id="main">
+        <noscript>This site just doesn't work, period, without JavaScript</noscript>
+
+        <!-- cdkDropList -->
+        <!-- (cdkDropListDropped)="drop($event)" -->
+        <ul id="list" class="ui-sortable">
+            <!-- <div cdkDropList (cdkDropListDropped)="drop($event)"> cdkDrag-->
+            <div cdkDropList (cdkDropListDropped)="drop($event)">
+                <li color=" 1" class="colorBlue" rel="1" id="2" *ngFor="let li of todoList; let i = index" cdkDrag>
+                    <span id="2listitem" [ngStyle]="{'text-decoration':(li.isDone == true)?'line-through':'none'}"
+                        [style.BackgroundColor]="li.colorCode" title="Double-click to edit..." style="opacity: 1;"
+                        (dblclick)="ShowTextBox(li.id)">
+
+                        <!-- && hideTextBoxProp == null -->
+
+                        <p class="text-dark" *ngIf="li.id != colorBox">{{li.description}}</p>
+                        <!-- <div class=" innerElement" style="width: 600;"> -->
+                        <!-- width: 400px; -->
+
+                        <!-- (dblclick)="CloseUpdateOperation(li.id)" -->
+                        <div class="row" (dblclick)="CloseUpdateOperation(li.id)">
+                            <div class="col-sm-11">
+                                <input type="text" class="" style="width: 100%;" [(ngModel)]="li.description"
+                                    [hidden]="hideInnerTextBtn" id="new-list-item-text"
+                                    title="Double-click to resume..." name="new-list-item-text"
+                                    *ngIf="disableField != true && li.id == colorBox" />
+                            </div>
+                            <div class="col-sm-1 mt-1" [hidden]="hideInnerTextBtn">
+                                <!-- *ngIf="li.id != hideTextBoxProp"
+                             (dbclik)="CloseUpdateOperation(li.id)"
+                            -->
+                                <!-- (click)="UpdateTodoItem(li.id,li.description)" -->
+                                <button class="btn btn-light btn-outline-secondary btn-sm"
+                                    (click)="UpdateTodoItem(li.id,li.description)"
+                                    *ngIf="disableField != true && li.id == colorBox">Save</button>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </span>
+
+                    <div class="draggertab tab"></div>
+
+                    <div class="colortab tab" (click)="ShowColorBox(li.id)">
+                        <input type="color" *ngIf="li.id == colorBoxProp" class="form-control" class="form-control"
+                            (mouseleave)="HideColorBox(li.id)" [(ngModel)]="colorModel.ColorCode">
+                    </div>
+
+                    <div (click)="DeleteShowFun(li.id)" class="tab delDefaul">
+
+                    </div>
+                    <div class="deletetab tab" (click)="DeleteFunction(li.id)"
+                        *ngIf="delDefaultProp != true && li.id == delPropVal"
+                        style="width: 44px; display: block; right: -90px; top: 6px;">
+                    </div>
+                    <div class="donetab tab" (click)="MarkTodoDone(li.id)" *ngIf="li.isDone != true"></div>
+                </li>
+            </div>
+            <!-- </div> -->
+        </ul>
+        <br />
+
+        <form action="" id="add-new" method="post">
+            <input type="text" id="new-list-item-text" [(ngModel)]="todo.Description" name="new-list-item-text" />
+            <input type="submit" id="add-new-submit" value="Add" (click)="AddData()" class="button" />
+        </form>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!-- <div class="h1 text-danger">Heading One</div> -->
